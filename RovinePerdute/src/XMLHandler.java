@@ -24,11 +24,11 @@ public class XMLHandler {
         ArrayList<City> cities = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
             cities.add(new City(
-                    ids.get(i),
+                    Integer.parseInt(ids.get(i)),
                     names.get(i),
-                    xs.get(i),
-                    ys.get(i),
-                    hs.get(i)
+                    Integer.parseInt(xs.get(i)),
+                    Integer.parseInt(ys.get(i)),
+                    Integer.parseInt(hs.get(i))
             ));
         }
 
