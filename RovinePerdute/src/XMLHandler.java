@@ -16,7 +16,7 @@ public class XMLHandler {
         Map<String, List<String>> cityMap = readFromFile(filepath, attributes);
 
         List<String> ids = cityMap.get("id");
-        List<String> names = cityMap.get("names");
+        List<String> names = cityMap.get("name");
         List<String> xs = cityMap.get("x");
         List<String> ys = cityMap.get("y");
         List<String> hs = cityMap.get("h");
@@ -32,7 +32,50 @@ public class XMLHandler {
             ));
         }
 
+        Map<String, List<String>> links = readLinksBetweenCities(filepath);
+        for (String id : links.keySet()){
+            City city = getCityFromId(cities,Integer.parseInt(id));
+            for (String linkedCityId : links.get(id)){
+                city.addConnection(getCityFromId(cities,Integer.parseInt(linkedCityId)));
+            }
+        }
+
         return cities;
+    }
+
+    public static City getCityFromId(List<City> cities, int id){
+        for (City city : cities){
+            if(city.getId() == id){
+                return city;
+            }
+        }
+        throw new CityNotFoundException();
+    }
+
+    public static Map<String, List<String>> readLinksBetweenCities(String filepath)
+            throws FileNotFoundException, XMLStreamException {
+        XMLStreamReader xmlr;
+        xmlr = xmlif.createXMLStreamReader(filepath,
+                new FileInputStream(filepath));
+
+        Map<String, List<String>> links = new HashMap<>();
+
+        String lastId = "0";
+        while(xmlr.hasNext()) {
+            if (xmlr.getEventType() == XMLStreamConstants.START_ELEMENT) {
+                for (int i = 0; i < xmlr.getAttributeCount(); i++) {
+                    if(xmlr.getAttributeLocalName(i).equals("id")){
+                        lastId = xmlr.getAttributeValue(i);
+                        links.put(lastId,new ArrayList<>());
+                    } else if (xmlr.getAttributeLocalName(i).equals("to")) {
+                        links.get(lastId).add(xmlr.getAttributeValue(i));
+                    }
+                }
+            }
+            xmlr.next();
+        }
+
+        return links;
     }
 
     //Generic method to read from a XML file given the file path
@@ -49,13 +92,14 @@ public class XMLHandler {
         xmlr = xmlif.createXMLStreamReader(filepath,
                 new FileInputStream(filepath));
 
-        String lastTag = "";
         while(xmlr.hasNext()) {
             if (xmlr.getEventType() == XMLStreamConstants.START_ELEMENT) {
                 for (int i = 0; i < xmlr.getAttributeCount(); i++) {
                     String attribute = xmlr.getAttributeLocalName(i);
                     String value = xmlr.getAttributeValue(i);
-                    data.get(attribute).add(value);
+                    if(data.get(attribute) != null){
+                        data.get(attribute).add(value);
+                    }
                 }
             }
             xmlr.next();

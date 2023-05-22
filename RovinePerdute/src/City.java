@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class City {
@@ -22,6 +23,7 @@ public class City {
         this.x = latitude;
         this.y = longitude;
         this.h = altitude;
+        this.connections = new ArrayList<>();
     }
 
     public int getId() {
