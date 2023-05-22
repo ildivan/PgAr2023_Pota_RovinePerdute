@@ -6,11 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class that handles reading and writing with XML files.
+ */
 public class XMLHandler {
     private static final XMLInputFactory xmlif = XMLInputFactory.newInstance();
     private static final XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
 
 
+    /**
+     * Reads cities and connections from specified filepath
+     */
     public static List<City> getCities(String filepath) throws XMLStreamException, FileNotFoundException {
         String[] attributes = {"size", "id", "name", "x", "y", "h"};
         Map<String, List<String>> cityMap = readFromFile(filepath, attributes);
@@ -43,6 +49,11 @@ public class XMLHandler {
         return cities;
     }
 
+    /**
+     * @param cities A list of cities
+     * @param id The id of the city to find
+     * @return The city from the list given its id
+     */
     public static City getCityFromId(List<City> cities, int id){
         for (City city : cities){
             if(city.getId() == id){
@@ -52,6 +63,12 @@ public class XMLHandler {
         throw new CityNotFoundException();
     }
 
+    /**
+     * Gets the connections between cities as a map that maps ids to lists of ids,
+     * Each id is mapped to a list of the ids the city is connected to.
+     * @param filepath Where to look for the links.
+     * @return The map containing all connections.
+     */
     public static Map<String, List<String>> readLinksBetweenCities(String filepath)
             throws FileNotFoundException, XMLStreamException {
         XMLStreamReader xmlr;
@@ -78,8 +95,12 @@ public class XMLHandler {
         return links;
     }
 
-    //Generic method to read from a XML file given the file path
-    // and the list of tags containing data to search for.
+    /**
+     * Generic method to get all attribute values mapped as lists to their attribute name.
+     * @param filepath Where to look for attributes.
+     * @param attributeNames The attribute names to look for.
+     * @return Map of the attribute names and lists of values.
+     */
     public static Map<String, List<String>> readFromFile(String filepath, String...attributeNames)
             throws FileNotFoundException, XMLStreamException {
         Map<String,List<String>> data = new HashMap<>();
