@@ -12,8 +12,8 @@ public class City {
         return connections;
     }
 
-    public void setConnections(List<City> connections) {
-        this.connections = connections;
+    public void addConnection(City city) {
+        this.connections.add(city);
     }
 
     public City(int id, String name, int latitude, int longitude, int altitude) {
