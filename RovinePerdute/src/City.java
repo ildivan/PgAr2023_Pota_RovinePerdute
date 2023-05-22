@@ -3,9 +3,9 @@ import java.util.List;
 public class City {
     private int id;
     private String name;
-    private int latitude;
-    private int longitude;
-    private int altitude;
+    private int x;
+    private int y;
+    private int h;
     private List<City> connections;
 
     public List<City> getConnections() {
@@ -19,9 +19,9 @@ public class City {
     public City(int id, String name, int latitude, int longitude, int altitude) {
         this.id = id;
         this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.altitude = altitude;
+        this.x = latitude;
+        this.y = longitude;
+        this.h = altitude;
     }
 
     public int getId() {
@@ -32,16 +32,16 @@ public class City {
         return name;
     }
 
-    public int getlatitude() {
-        return latitude;
+    public int getX() {
+        return x;
     }
 
-    public int getlongitude() {
-        return longitude;
+    public int getY() {
+        return y;
     }
 
-    public int getaltitude() {
-        return altitude;
+    public int getH() {
+        return h;
     }
     
 }
