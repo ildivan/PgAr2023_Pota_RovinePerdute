@@ -64,10 +64,7 @@ public class PathFinder {
     }
 
     private double getHeuristic(City city) {
-        double deltaX = Math.pow(city.getX() - end.getX(), 2);
-        double deltaY = Math.pow(city.getY() - end.getY(), 2);
-        double deltaH = Math.pow(city.getH() - end.getH(),2);
-        return Math.sqrt(deltaY + deltaX + deltaH);
+        return calc.calculateEdgeDistance(city,end);
     }
 
     private double getFCost(City city) {
@@ -90,4 +87,7 @@ public class PathFinder {
         return gCosts.get(end);
     }
 
+    public int getNumberOfCities() {
+        return getOptimalRoute().size();
+    }
 }

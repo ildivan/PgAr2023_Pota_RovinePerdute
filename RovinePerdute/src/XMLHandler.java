@@ -1,10 +1,8 @@
 import javax.xml.stream.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.util.*;
 
 /**
  * Class that handles reading and writing with XML files.
@@ -129,4 +127,46 @@ public class XMLHandler {
 
         return data;
     }
+
+    public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
+        XMLStreamWriter xmlw;
+        try {
+            xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(filepath), "utf-8");
+            xmlw.writeStartDocument("utf-8", "1.0");
+            xmlw.writeStartElement("routes");
+
+            writeRoute(xmlw, p1, "Tonatiuh");
+            writeRoute(xmlw, p2, "Metztli");
+
+            xmlw.writeEndElement();
+            xmlw.writeEndDocument();
+            xmlw.flush();
+            xmlw.close();
+        } catch (Exception e) {
+            System.out.println("Errore nella scrittura");
+        }
+    }
+
+    public static void writeRoute(XMLStreamWriter xmlw , PathFinder p, String teamName) throws XMLStreamException {
+        xmlw.writeStartElement("route");
+        xmlw.writeAttribute("team",teamName);
+        xmlw.writeAttribute("cost", Double.toString(p.getPathCost()));
+        xmlw.writeAttribute("cities", Integer.toString(p.getNumberOfCities()));
+        ArrayDeque<City> route = p.getOptimalRoute();
+
+        while(!route.isEmpty()) {
+            writeCity(xmlw,route.pop());
+        }
+
+        xmlw.writeEndElement();
+    }
+
+    //Writes xml tag that does not have any sub-tags or any attributes.
+    private static void writeCity(XMLStreamWriter xmlw, City city) throws XMLStreamException {
+        xmlw.writeStartElement("city");
+        xmlw.writeAttribute("id",Integer.toString(city.getId()));
+        xmlw.writeAttribute("name",city.getName());
+        xmlw.writeEndElement();
+    }
 }
+
