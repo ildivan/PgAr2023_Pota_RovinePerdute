@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jfiglet-0.0.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/RovinePerdute/resources/jfiglet-0.0.9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/RovinePerdute/resources/jfiglet-0.0.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
