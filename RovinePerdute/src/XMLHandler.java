@@ -1,4 +1,5 @@
 import javax.xml.stream.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -126,6 +127,10 @@ public class XMLHandler {
         }
 
         return data;
+    }
+
+    public static String getXMLFileName(String filePath) {
+        return new File(filePath).getName();
     }
 
     public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
