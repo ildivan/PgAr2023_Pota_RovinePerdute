@@ -27,7 +27,7 @@ public class Main {
     public static void selectPreset() {
         switch (LostRuinsMenu.presetMenu()) {
             case 1 -> calculatePath("RovinePerdute/test_file/PgAr_Map_5.xml");
-            case 2 -> calculatePath("RovinePerdute/test_file/PgAr_Map_12.xml");
+            case 2 -> calculatePath("RovinePerdute/test_file/PgAr_Map_13.xml");
             case 3 -> calculatePath("RovinePerdute/test_file/PgAr_Map_50.xml");
             case 4 -> calculatePath("RovinePerdute/test_file/PgAr_Map_200.xml");
             case 5 -> calculatePath("RovinePerdute/test_file/PgAr_Map_2000.xml");
