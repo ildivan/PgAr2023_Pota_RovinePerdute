@@ -1,6 +1,6 @@
 public class CityNotFoundException extends RuntimeException {
     public CityNotFoundException() {
-        this("City not found!");
+        this(Literals.CITY_NOT_FOUND);
     }
 
     public CityNotFoundException(String message) {
