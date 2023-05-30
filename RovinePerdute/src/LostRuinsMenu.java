@@ -24,6 +24,17 @@ public class LostRuinsMenu {
         Main.calculatePath(path);
     }
 
+    public static void loading(int numOfCities) {
+        try {
+            if (numOfCities <= 2000)
+                Menu.loadingMessage(String.format("We are processing %d cities", numOfCities));
+            else
+                System.out.printf("We are processing %d cities, this could take a while...", numOfCities);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     // Prints the welcome ASCII art text.
     public static void welcome() {
         try {

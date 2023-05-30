@@ -25,6 +25,8 @@ public class XMLHandler {
         List<String> ys = cityMap.get("y");
         List<String> hs = cityMap.get("h");
 
+        LostRuinsMenu.loading(ids.size());
+
         ArrayList<City> cities = new ArrayList<>();
         for (int i = 0; i < ids.size(); i++) {
             cities.add(new City(
