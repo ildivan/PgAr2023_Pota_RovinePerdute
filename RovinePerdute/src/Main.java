@@ -6,7 +6,6 @@ public class Main {
             switch (LostRuinsMenu.mainMenu()) {
                 case 1 -> LostRuinsMenu.inputFilePath();
                 case 2 -> selectPreset();
-                case 3 -> calculatePath("RovinePerdute/test_file/PgAr_Map_2000.xml");
                 case 0 -> {
                     return;
                 }

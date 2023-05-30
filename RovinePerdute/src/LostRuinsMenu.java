@@ -7,14 +7,14 @@ public class LostRuinsMenu {
     public static int mainMenu() {
         Menu.clearConsole();
         welcome();
-        String[] entries = { "Input file path", "Select one of the default XML files", "Perform a test (Map 2000)" };
-        Menu tamaMenu = new Menu("Tama Menu", entries, true, true, true);
+        String[] entries = { "Input file path", "Select one of the default XML files" };
+        Menu tamaMenu = new Menu("Ruins' Menu", entries, true, true, true);
         return tamaMenu.choose();
     }
 
     public static int presetMenu() {
         Menu.clearConsole();
-        String[] entries = { "5 citta'", "12 citta'", "50 citta'", "200 citta'", "2000 citta'", "10000 citta'" };
+        String[] entries = { "5 cities", "12 cities", "50 cities", "200 cities", "2000 cities", "10000 cities" };
         Menu presetMenu = new Menu("Select one of the following presets", entries, true, true, false);
         return presetMenu.choose();
     }
