@@ -13,8 +13,8 @@ public class PathFinder {
 
     /**
      * Constructor for the pathfinder.
-     * @param start the start node
-     * @param end the end node
+     * @param start The start node
+     * @param end The end node
      * @param calc The object that calculates the cost from a node to another.
      */
     public PathFinder(City start, City end, EdgeCalculator calc) {
@@ -27,12 +27,14 @@ public class PathFinder {
         calculateOptimalRoute();
     }
 
-    //Travels through the graph and finds the optimal path
+    /**
+     * Travels through the graph and finds the optimal path
+     */
     private void calculateOptimalRoute() {
-        List<City> openSet = new ArrayList<>(); //List of nodes to process
-        List<City> closedSet = new ArrayList<>(); //List of nodes already processed
+        List<City> openSet = new ArrayList<>(); // List of nodes to process
+        List<City> closedSet = new ArrayList<>(); // List of nodes already processed
 
-        //Sets start node information
+        // Sets start node information
         openSet.add(start);
         gCosts.put(start,0.0);
         hCosts.put(start, getHCost(start));
@@ -40,8 +42,8 @@ public class PathFinder {
         while(!openSet.isEmpty()){
 
             City currentCity = openSet.get(0);
-            //Gets the node in the openSet with the lowest f cost , or the lowest g cost if there are two nodes with
-            //the lowest f score.
+            // Gets the node in the openSet with the lowest f cost , or the lowest g cost if there are two nodes with
+            // the lowest f score.
             for (City city : openSet) {
                 if(
                         getFCost(city) < getFCost(currentCity)
@@ -51,25 +53,25 @@ public class PathFinder {
                 }
             }
 
-            //Update openSet and closedSet for the currectCity, as currentCity is now considered processed.
+            // Update openSet and closedSet for the currentCity, as currentCity is now considered processed.
             openSet.remove(currentCity);
             closedSet.add(currentCity);
 
 
             for (City neighbor : currentCity.getConnections()) {
-                if(closedSet.contains(neighbor)) //if a neighbor is in closedSet it should not be considered
+                if(closedSet.contains(neighbor)) // If a neighbor is in closedSet it should not be considered
                     continue;
 
                 double neighborGCost = gCosts.get(currentCity) + calc.calculateEdgeDistance(currentCity,neighbor);
 
-                //Checks if the neighbor has a lower gCost than it previously had,
+                // Checks if the neighbor has a lower gCost than it previously had,
                 // or if the node was not previously checked, thus not having a g cost.
                 if(!openSet.contains(neighbor) || neighborGCost < gCosts.get(neighbor)) {
                     gCosts.put(neighbor,neighborGCost);
                     previousCities.put(neighbor,currentCity);
 
-                    //if the node was not previously checked, the h cost of the  node is generated and the node
-                    //is put in the openSet
+                    // If the node was not previously checked, the h cost of the node is generated and the node
+                    // is put in the openSet
                     if(!openSet.contains(neighbor)) {
                         hCosts.put(neighbor, getHCost(neighbor));
                         openSet.add(neighbor);
@@ -79,12 +81,16 @@ public class PathFinder {
         }
     }
 
-    //Get heuristic cost of a city
+    /**
+     * Get heuristic cost of a city
+     */
     private double getHCost(City city) {
         return calc.calculateEdgeDistance(city,end);
     }
 
-    //Get estimated cost of a node, fcost = gcost + hcost
+    /**
+     * Get estimated cost of a node, fcost = gcost + hcost
+     */
     private double getFCost(City city) {
         return gCosts.get(city) + hCosts.get(city);
     }
@@ -93,7 +99,7 @@ public class PathFinder {
      * Returns the optimal route as a stack, with the start node on top.
      */
     public ArrayDeque<City> getOptimalRoute() {
-        ArrayDeque<City> route = new ArrayDeque<>(); //Stack representing a path
+        ArrayDeque<City> route = new ArrayDeque<>(); // Stack representing a path
 
         City current = end;
         while(current != start) {
