@@ -131,10 +131,19 @@ public class XMLHandler {
         return data;
     }
 
+    /**
+     * Gets the file name given the file path
+     */
     public static String getXMLFileName(String filePath) {
         return new File(filePath).getName();
     }
 
+    /**
+     * Writes the paths found to the xml file specified
+     * @param p1 the first pathfinder
+     * @param p2 the second pathfinder
+     * @param filepath the path of the xml file
+     */
     public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
         XMLStreamWriter xmlw;
         try {
@@ -154,7 +163,8 @@ public class XMLHandler {
         }
     }
 
-    public static void writeRoute(XMLStreamWriter xmlw , PathFinder p, String teamName) throws XMLStreamException {
+    //Writes a route in the xml file
+    private static void writeRoute(XMLStreamWriter xmlw , PathFinder p, String teamName) throws XMLStreamException {
         xmlw.writeStartElement("route");
         xmlw.writeAttribute("team",teamName);
         xmlw.writeAttribute("cost", Double.toString(p.getPathCost()));
