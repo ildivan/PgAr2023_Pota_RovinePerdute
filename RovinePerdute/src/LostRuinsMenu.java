@@ -21,7 +21,7 @@ public class LostRuinsMenu {
 
     public static void inputFilePath() {
         String path = InputData.readNonEmptyString(Literals.INPUT_FILE_PATH_1, false);
-        Main.calculatePath(path);
+        Main.startPathFinding(path);
     }
 
     public static void loading(int numOfCities) {
