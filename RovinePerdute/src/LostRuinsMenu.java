@@ -14,7 +14,7 @@ public class LostRuinsMenu {
 
     public static int presetMenu() {
         Menu.clearConsole();
-        String[] entries = { "5 cities", "12 cities", "50 cities", "200 cities", "2000 cities", "10000 cities" };
+        String[] entries = { "5 cities", "13 cities", "50 cities", "200 cities", "2000 cities", "10000 cities" };
         Menu presetMenu = new Menu(Literals.SELECT_ONE_PRESET, entries, true, true, false);
         return presetMenu.choose();
     }

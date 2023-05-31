@@ -138,6 +138,21 @@ public class XMLHandler {
         return new File(filePath).getName();
     }
 
+    public static String generateNewFileName(String filePath) {
+        String fileName = getXMLFileName(filePath);
+        String substring = fileName.substring(0, fileName.length() - 4);
+        File[] files = new File(new File(filePath).getParent()).listFiles();
+
+        int exists = 0;
+        if (files != null)
+            for (File file : files)
+                if (file.getName().startsWith(substring))
+                    if (file.getName().equals(substring + ".xml") || file.getName().startsWith(substring + "_("))
+                        exists++;
+
+        return filePath.substring(0, filePath.length()-4) + (exists == 0 ? "" : String.format("_(%d)", exists)) + ".xml";
+    }
+
     /**
      * Writes the paths found to the xml file specified
      * @param p1 the first pathfinder
@@ -147,7 +162,7 @@ public class XMLHandler {
     public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
         XMLStreamWriter xmlw;
         try {
-            xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(filepath), "utf-8");
+            xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(generateNewFileName(filepath)), "utf-8");
             xmlw.writeStartDocument("utf-8", "1.0");
             xmlw.writeStartElement("routes");
 
