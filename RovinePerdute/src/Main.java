@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Menu.clearConsole();
-
+        // If-else statement for differentiating command-line session from the session with a Menu interaction.
         if (args.length == 0) {
             do {
                 switch (LostRuinsMenu.mainMenu()) {
@@ -24,6 +24,8 @@ public class Main {
             ArrayList<String> listOfFiles = new ArrayList<>();
             boolean fileList = false;
             try {
+                // Analyze all commands given in command-line.
+                // Allowed commands: --help, -h, --output, -o, --files, -f
                 for (int i=0; i<args.length; i++) {
                     if (args[i].startsWith("-")) {
                         switch (args[i].substring(args[i].lastIndexOf("-")+1)) {
@@ -56,9 +58,11 @@ public class Main {
                         throw new IllegalArgumentException(Literals.SPECIFY_F_COMMAND);
                 }
 
+                // Check if output is really a folder
                 if (directory != null && (!new File(directory).isDirectory() || !directory.endsWith("\\")))
                     throw new IllegalArgumentException(String.format(Literals.PATH_IS_NOT_A_DIRECTORY, directory));
 
+                // Run pathfinding for all XML files given in input
                 for (String path : listOfFiles)
                     startPathFinding(path, directory == null ? "Output/" : directory);
 
@@ -68,6 +72,11 @@ public class Main {
         }
     }
 
+    /**
+     * Run the pathfinding algorithm and call the function for writing the output file
+     * @param sourcePath The complete filepath
+     * @param outputPath The folder where store the output file
+     */
     public static void startPathFinding(String sourcePath, String outputPath) {
         try {
             List<City> cities = XMLHandler.getCities(sourcePath);
@@ -80,6 +89,9 @@ public class Main {
         }
     }
 
+    /**
+     * Switch-case statement for calling one of the XML presets
+     */
     public static void selectPreset() {
         switch (LostRuinsMenu.presetMenu()) {
             case 1 -> startPathFinding("RovinePerdute/test_file/PgAr_Map_5.xml", null);
@@ -94,6 +106,9 @@ public class Main {
         }
     }
 
+    /**
+     * Displays the commands for interaction with the command-line
+     */
     public static void showHelp() {
         System.out.println(
                 "Usage: PgAr2023_Pota_RovinePerdute.jar (FILE_PATH)... [OUTPUT_FOLDER]\n\n"
