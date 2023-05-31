@@ -10,23 +10,25 @@ public class LostRuinsMenu {
 
     /**
      * Menu for displaying the main functions.
+     *
      * @return A number representing the user choice.
      */
     public static int mainMenu() {
         Menu.clearConsole();
         welcome();
-        String[] entries = { Literals.INPUT_FILE_PATH, Literals.SELECT_ONE_XML_FILE};
+        String[] entries = {Literals.INPUT_FILE_PATH, Literals.SELECT_ONE_XML_FILE};
         Menu tamaMenu = new Menu(Literals.RUINS_MENU, entries, true, true, true);
         return tamaMenu.choose();
     }
 
     /**
      * Menu for displaying the preset paths.
+     *
      * @return A number representing the user choice.
      */
     public static int presetMenu() {
         Menu.clearConsole();
-        String[] entries = { "5 cities", "13 cities", "50 cities", "200 cities", "2000 cities", "10000 cities" };
+        String[] entries = {"5 cities", "13 cities", "50 cities", "200 cities", "2000 cities", "10000 cities"};
         Menu presetMenu = new Menu(Literals.SELECT_ONE_PRESET, entries, true, true, false);
         return presetMenu.choose();
     }
@@ -41,6 +43,7 @@ public class LostRuinsMenu {
 
     /**
      * Shows a message to indicate to the user that the program is proceeding with the algorithm to find the best route.
+     *
      * @param numOfCities The number of cities that are going to be calculated.
      */
     public static void loading(int numOfCities) {

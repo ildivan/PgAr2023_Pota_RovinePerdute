@@ -49,5 +49,4 @@ public class City {
     public int getH() {
         return h;
     }
-    
 }

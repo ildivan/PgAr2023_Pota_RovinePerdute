@@ -9,13 +9,14 @@ public class PathFinder {
     private EdgeCalculator calc;
     private Map<City, Double> gCosts;
     private Map<City, Double> hCosts;
-    private Map<City,City> previousCities;
+    private Map<City, City> previousCities;
 
     /**
      * Constructor for the pathfinder.
+     *
      * @param start The start node
-     * @param end The end node
-     * @param calc The object that calculates the cost from a node to another.
+     * @param end   The end node
+     * @param calc  The object that calculates the cost from a node to another.
      */
     public PathFinder(City start, City end, EdgeCalculator calc) {
         this.start = start;
@@ -36,16 +37,16 @@ public class PathFinder {
 
         // Sets start node information
         openSet.add(start);
-        gCosts.put(start,0.0);
+        gCosts.put(start, 0.0);
         hCosts.put(start, getHCost(start));
 
-        while(!openSet.isEmpty()){
+        while (!openSet.isEmpty()) {
 
             City currentCity = openSet.get(0);
             // Gets the node in the openSet with the lowest f cost , or the lowest g cost if there are two nodes with
             // the lowest f score.
             for (City city : openSet) {
-                if(
+                if (
                         getFCost(city) < getFCost(currentCity)
                                 || (getFCost(city) == getFCost(currentCity) && gCosts.get(city) < gCosts.get(currentCity))
                 ) {
@@ -59,20 +60,20 @@ public class PathFinder {
 
 
             for (City neighbor : currentCity.getConnections()) {
-                if(closedSet.contains(neighbor)) // If a neighbor is in closedSet it should not be considered
+                if (closedSet.contains(neighbor)) // If a neighbor is in closedSet it should not be considered
                     continue;
 
-                double neighborGCost = gCosts.get(currentCity) + calc.calculateEdgeDistance(currentCity,neighbor);
+                double neighborGCost = gCosts.get(currentCity) + calc.calculateEdgeDistance(currentCity, neighbor);
 
                 // Checks if the neighbor has a lower gCost than it previously had,
                 // or if the node was not previously checked, thus not having a g cost.
-                if(!openSet.contains(neighbor) || neighborGCost < gCosts.get(neighbor)) {
-                    gCosts.put(neighbor,neighborGCost);
-                    previousCities.put(neighbor,currentCity);
+                if (!openSet.contains(neighbor) || neighborGCost < gCosts.get(neighbor)) {
+                    gCosts.put(neighbor, neighborGCost);
+                    previousCities.put(neighbor, currentCity);
 
                     // If the node was not previously checked, the h cost of the node is generated and the node
                     // is put in the openSet
-                    if(!openSet.contains(neighbor)) {
+                    if (!openSet.contains(neighbor)) {
                         hCosts.put(neighbor, getHCost(neighbor));
                         openSet.add(neighbor);
                     }
@@ -85,7 +86,7 @@ public class PathFinder {
      * Get heuristic cost of a city
      */
     private double getHCost(City city) {
-        return calc.calculateEdgeDistance(city,end);
+        return calc.calculateEdgeDistance(city, end);
     }
 
     /**
@@ -102,7 +103,7 @@ public class PathFinder {
         ArrayDeque<City> route = new ArrayDeque<>(); // Stack representing a path
 
         City current = end;
-        while(current != start) {
+        while (current != start) {
             route.add(current);
             current = previousCities.get(current);
         }

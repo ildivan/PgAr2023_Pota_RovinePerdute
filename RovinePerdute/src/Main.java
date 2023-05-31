@@ -26,9 +26,9 @@ public class Main {
             try {
                 // Analyze all commands given in command-line.
                 // Allowed commands: --help, -h, --output, -o, --files, -f
-                for (int i=0; i<args.length; i++) {
+                for (int i = 0; i < args.length; i++) {
                     if (args[i].startsWith("-")) {
-                        switch (args[i].substring(args[i].lastIndexOf("-")+1)) {
+                        switch (args[i].substring(args[i].lastIndexOf("-") + 1)) {
                             case "o":
                             case "output":
                                 fileList = false;
@@ -48,7 +48,7 @@ public class Main {
                                     break;
                                 }
                             default:
-                                throw new IllegalArgumentException("Invalid option: " + args[i].substring(args[i].lastIndexOf("-")+1));
+                                throw new IllegalArgumentException("Invalid option: " + args[i].substring(args[i].lastIndexOf("-") + 1));
                         }
                         continue;
                     }
@@ -74,6 +74,7 @@ public class Main {
 
     /**
      * Run the pathfinding algorithm and call the function for writing the output file
+     *
      * @param sourcePath The complete filepath
      * @param outputPath The folder where store the output file
      */
@@ -82,7 +83,7 @@ public class Main {
             List<City> cities = XMLHandler.getCities(sourcePath);
             PathFinder p1 = new PathFinder(cities.get(0), cities.get(cities.size() - 1), new Tonatiuh());
             PathFinder p2 = new PathFinder(cities.get(0), cities.get(cities.size() - 1), new Metztli());
-            XMLHandler.writeOutput(p1, p2, String.format(outputPath == null ? "RovinePerdute/output/Routes_%s" : outputPath+"Routes_%s", XMLHandler.getXMLFileName(sourcePath)));
+            XMLHandler.writeOutput(p1, p2, String.format(outputPath == null ? "RovinePerdute/output/Routes_%s" : outputPath + "Routes_%s", XMLHandler.getXMLFileName(sourcePath)));
             Menu.clearConsole();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -112,9 +113,9 @@ public class Main {
     public static void showHelp() {
         System.out.println(
                 "Usage: PgAr2023_Pota_RovinePerdute.jar (FILE_PATH)... [OUTPUT_FOLDER]\n\n"
-            +   "Option\tLong option\tMeaning\n"
-            +   "  -h\t--help\t\tShows this help message\n"
-            +   "  -f\t--files\t\tFollowed by all XML files to analyze\n"
-            +   "  -o\t--output\tDirectory for output files\n");
+                        + "Option\tLong option\tMeaning\n"
+                        + "  -h\t--help\t\tShows this help message\n"
+                        + "  -f\t--files\t\tFollowed by all XML files to analyze\n"
+                        + "  -o\t--output\tDirectory for output files\n");
     }
 }

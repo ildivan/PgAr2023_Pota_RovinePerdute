@@ -13,7 +13,7 @@ public class XMLHandler {
      * Reads cities and connections from specified filepath
      */
     public static List<City> getCities(String filepath) throws XMLStreamException, FileNotFoundException {
-        String[] attributes = { "size", "id", "name", "x", "y", "h" };
+        String[] attributes = {"size", "id", "name", "x", "y", "h"};
         Map<String, List<String>> cityMap = readFromFile(filepath, attributes);
 
         List<String> ids = cityMap.get("id");
@@ -62,7 +62,7 @@ public class XMLHandler {
     /**
      * Gets the connections between cities as a map that maps ids to lists of ids,
      * Each id is mapped to a list of the ids the city is connected to.
-     * 
+     *
      * @param filepath Where to look for the links.
      * @return The map containing all connections.
      */
@@ -95,7 +95,7 @@ public class XMLHandler {
     /**
      * Generic method to get all attribute values mapped as lists to their attribute
      * name.
-     * 
+     *
      * @param filepath       Where to look for attributes.
      * @param attributeNames The attribute names to look for.
      * @return Map of the attribute names and lists of values.
@@ -137,6 +137,7 @@ public class XMLHandler {
 
     /**
      * Generates the new file name, adding between parentheses a number for not overwrite existing files.
+     *
      * @param filePath The input file name
      * @return The new file name
      */
@@ -152,16 +153,17 @@ public class XMLHandler {
                     if (file.getName().equals(substring + ".xml") || file.getName().startsWith(substring + "_("))
                         exists++;
 
-        return filePath.substring(0, filePath.length()-4) + (exists == 0 ? "" : String.format("_(%d)", exists)) + ".xml";
+        return filePath.substring(0, filePath.length() - 4) + (exists == 0 ? "" : String.format("_(%d)", exists)) + ".xml";
     }
 
     /**
      * Writes the paths found to the xml file specified
-     * @param p1 The first pathfinder
-     * @param p2 The second pathfinder
+     *
+     * @param p1       The first pathfinder
+     * @param p2       The second pathfinder
      * @param filepath The path of the xml file
      */
-    public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
+    public static void writeOutput(PathFinder p1, PathFinder p2, String filepath) {
         XMLStreamWriter xmlw;
         try {
             // Checks if the output folder exists. If not, it will create the directory.
@@ -192,15 +194,15 @@ public class XMLHandler {
     /**
      * Writes a route in the xml file
      */
-    private static void writeRoute(XMLStreamWriter xmlw , PathFinder p, String teamName) throws XMLStreamException {
+    private static void writeRoute(XMLStreamWriter xmlw, PathFinder p, String teamName) throws XMLStreamException {
         xmlw.writeStartElement("route");
-        xmlw.writeAttribute("team",teamName);
+        xmlw.writeAttribute("team", teamName);
         xmlw.writeAttribute("cost", Double.toString(p.getPathCost()));
         xmlw.writeAttribute("cities", Integer.toString(p.getNumberOfCities()));
         ArrayDeque<City> route = p.getOptimalRoute();
 
-        while(!route.isEmpty()) {
-            writeCity(xmlw,route.pop());
+        while (!route.isEmpty()) {
+            writeCity(xmlw, route.pop());
         }
 
         xmlw.writeEndElement();
@@ -211,8 +213,8 @@ public class XMLHandler {
      */
     private static void writeCity(XMLStreamWriter xmlw, City city) throws XMLStreamException {
         xmlw.writeStartElement("city");
-        xmlw.writeAttribute("id",Integer.toString(city.getId()));
-        xmlw.writeAttribute("name",city.getName());
+        xmlw.writeAttribute("id", Integer.toString(city.getId()));
+        xmlw.writeAttribute("name", city.getName());
         xmlw.writeEndElement();
     }
 }
