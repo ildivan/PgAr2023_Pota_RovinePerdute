@@ -33,7 +33,7 @@ public class Main {
                                 if (directory == null)
                                     directory = args[++i];
                                 else
-                                    throw new IllegalArgumentException("Output directory cannot be specified multiple times!");
+                                    throw new IllegalArgumentException(Literals.OUTPUT_DIRECTORY_MULTIPLE_TIMES);
                                 break;
                             case "f":
                             case "files":
@@ -53,11 +53,11 @@ public class Main {
                     if (fileList)
                         listOfFiles.add(args[i]);
                     else
-                        throw new IllegalArgumentException("You must specify -f command!");
+                        throw new IllegalArgumentException(Literals.SPECIFY_F_COMMAND);
                 }
 
                 if (directory != null && (!new File(directory).isDirectory() || !directory.endsWith("\\")))
-                    throw new IllegalArgumentException(String.format("Illegal argument: \"%s\" is not a directory!", directory));
+                    throw new IllegalArgumentException(String.format(Literals.PATH_IS_NOT_A_DIRECTORY, directory));
 
                 for (String path : listOfFiles)
                     startPathFinding(path, directory == null ? "Output/" : directory);

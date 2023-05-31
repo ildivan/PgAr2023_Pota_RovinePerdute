@@ -135,6 +135,11 @@ public class XMLHandler {
         return new File(filePath).getName();
     }
 
+    /**
+     * Generates the new file name, adding between parentheses a number for not overwrite existing files.
+     * @param filePath The input file name
+     * @return The new file name
+     */
     public static String generateNewFileName(String filePath) {
         String fileName = getXMLFileName(filePath);
         String substring = fileName.substring(0, fileName.length() - 4);
@@ -152,9 +157,9 @@ public class XMLHandler {
 
     /**
      * Writes the paths found to the xml file specified
-     * @param p1 the first pathfinder
-     * @param p2 the second pathfinder
-     * @param filepath the path of the xml file
+     * @param p1 The first pathfinder
+     * @param p2 The second pathfinder
+     * @param filepath The path of the xml file
      */
     public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
         XMLStreamWriter xmlw;
@@ -184,7 +189,9 @@ public class XMLHandler {
         }
     }
 
-    //Writes a route in the xml file
+    /**
+     * Writes a route in the xml file
+     */
     private static void writeRoute(XMLStreamWriter xmlw , PathFinder p, String teamName) throws XMLStreamException {
         xmlw.writeStartElement("route");
         xmlw.writeAttribute("team",teamName);
@@ -199,7 +206,9 @@ public class XMLHandler {
         xmlw.writeEndElement();
     }
 
-    //Writes xml tag that does not have any sub-tags or any attributes.
+    /**
+     * Writes xml tag that does not have any sub-tags or any attributes.
+     */
     private static void writeCity(XMLStreamWriter xmlw, City city) throws XMLStreamException {
         xmlw.writeStartElement("city");
         xmlw.writeAttribute("id",Integer.toString(city.getId()));

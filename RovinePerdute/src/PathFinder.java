@@ -12,7 +12,7 @@ public class PathFinder {
     private Map<City,City> previousCities;
 
     /**
-     * Constructor for the path finder.
+     * Constructor for the pathfinder.
      * @param start the start node
      * @param end the end node
      * @param calc The object that calculates the cost from a node to another.

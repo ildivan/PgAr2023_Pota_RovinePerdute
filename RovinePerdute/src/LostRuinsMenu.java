@@ -35,7 +35,9 @@ public class LostRuinsMenu {
         }
     }
 
-    // Prints the welcome ASCII art text.
+    /**
+     * Prints the welcome ASCII art text.
+     */
     public static void welcome() {
         try {
             System.out.println(FigletFont.convertOneLine(Literals.WELCOME_TO));
