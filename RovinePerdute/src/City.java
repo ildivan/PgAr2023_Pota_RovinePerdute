@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent one of the many cities that the archeologists have to go through.
+ * We consider the starting point and the destination as cities.
+ */
 public class City {
-    private int id;
-    private String name;
-    private int x;
-    private int y;
-    private int h;
-    private List<City> connections;
+    private int id; // Identification number
+    private String name; // City name
+    private int x; // Abscissa axis
+    private int y; // Ordinate axis
+    private int h; // Applicate axis
+    private List<City> connections; // List of all cities connected to a city instance
 
     public List<City> getConnections() {
         return connections;
