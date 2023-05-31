@@ -1,8 +1,5 @@
 import javax.xml.stream.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -162,7 +159,14 @@ public class XMLHandler {
     public static void writeOutput(PathFinder p1, PathFinder p2, String filepath){
         XMLStreamWriter xmlw;
         try {
-            xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(generateNewFileName(filepath)), "utf-8");
+            // Checks if the output folder exists. If not, it will create the directory.
+            File parentDirectory = new File(generateNewFileName(filepath)).getParentFile();
+
+            if (!parentDirectory.exists())
+                if (!parentDirectory.mkdirs())
+                    throw new IOException("Failed to create directory: " + parentDirectory.getAbsolutePath());
+
+            xmlw = xmlof.createXMLStreamWriter(new FileOutputStream(filepath), "utf-8");
             xmlw.writeStartDocument("utf-8", "1.0");
             xmlw.writeStartElement("routes");
 
@@ -173,6 +177,8 @@ public class XMLHandler {
             xmlw.writeEndDocument();
             xmlw.flush();
             xmlw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("Errore nella scrittura");
         }
