@@ -17,7 +17,6 @@ public class Main {
                         return;
                     }
                 }
-                Menu.clearConsole();
             } while (true);
         } else {
             String directory = null;
@@ -68,6 +67,7 @@ public class Main {
 
             } catch (IllegalArgumentException i) {
                 System.err.println(i.getMessage());
+                LostRuinsMenu.pressEnterToContinue();
             }
         }
     }
@@ -87,6 +87,7 @@ public class Main {
             Menu.clearConsole();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            LostRuinsMenu.pressEnterToContinue();
         }
     }
 

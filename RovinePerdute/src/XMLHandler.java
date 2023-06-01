@@ -186,8 +186,10 @@ public class XMLHandler {
             xmlw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            LostRuinsMenu.pressEnterToContinue();
         } catch (Exception e) {
             System.out.println("Errore nella scrittura");
+            LostRuinsMenu.pressEnterToContinue();
         }
     }
 

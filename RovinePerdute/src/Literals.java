@@ -13,6 +13,7 @@ public class Literals {
     public static final String OUTPUT_DIRECTORY_MULTIPLE_TIMES = "Output directory cannot be specified multiple times!";
     public static final String SPECIFY_F_COMMAND = "You must specify -f command!";
     public static final String PATH_IS_NOT_A_DIRECTORY = "Illegal argument: \"%s\" is not a directory!";
+    public static final String PRESS_ENTER_TO_CONTINUE = "\n\nPress Enter to continue...";
 
     /**
      * Constants for CityNotFoundException.java

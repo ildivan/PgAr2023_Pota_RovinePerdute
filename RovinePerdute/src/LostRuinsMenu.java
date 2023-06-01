@@ -67,4 +67,15 @@ public class LostRuinsMenu {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Pauses the program until user press the return key.
+     */
+    public static void pressEnterToContinue() {
+        System.out.print(Literals.PRESS_ENTER_TO_CONTINUE);
+        try {
+            System.in.read();
+        } catch (Exception e) {
+        }
+    }
 }
