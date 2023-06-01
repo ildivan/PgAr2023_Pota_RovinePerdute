@@ -70,7 +70,7 @@ public class XMLHandler {
             throws FileNotFoundException, XMLStreamException {
         XMLStreamReader xmlr;
         xmlr = xmlif.createXMLStreamReader(filepath,
-                new FileInputStream(filepath));
+                XMLHandler.class.getResourceAsStream(filepath));
 
         Map<String, List<String>> links = new HashMap<>();
 
@@ -110,7 +110,7 @@ public class XMLHandler {
 
         XMLStreamReader xmlr;
         xmlr = xmlif.createXMLStreamReader(filepath,
-                new FileInputStream(filepath));
+                XMLHandler.class.getResourceAsStream(filepath));
 
         while (xmlr.hasNext()) {
             if (xmlr.getEventType() == XMLStreamConstants.START_ELEMENT) {
